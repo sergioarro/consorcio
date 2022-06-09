@@ -1,18 +1,53 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { EnvironmentConfigService } from './environment-config.service';
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { DatabaseConfig } from '../../../domain/config/database.interface';
+import { JWTConfig } from '../../../domain/config/jwt.interface';
 
-describe('EnvironmentConfigService', () => {
-  let service: EnvironmentConfigService;
+@Injectable()
+export class EnvironmentConfigService implements DatabaseConfig, JWTConfig {
+  constructor(private configService: ConfigService) {}
+  
+  getJwtSecret(): string {
+    return this.configService.get<string>('JWT_SECRET');
+  }
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [EnvironmentConfigService],
-    }).compile();
+  getJwtExpirationTime(): string {
+    return this.configService.get<string>('JWT_EXPIRATION_TIME');
+  }
 
-    service = module.get<EnvironmentConfigService>(EnvironmentConfigService);
-  });
+  getJwtRefreshSecret(): string {
+    return this.configService.get<string>('JWT_REFRESH_TOKEN_SECRET');
+  }
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
-});
+  getJwtRefreshExpirationTime(): string {
+    return this.configService.get<string>('JWT_REFRESH_TOKEN_EXPIRATION_TIME');
+  }
+
+  getDatabaseHost(): string {
+    return this.configService.get<string>('DATABASE_HOST');
+  }
+
+  getDatabasePort(): number {
+    return this.configService.get<number>('DATABASE_PORT');
+  }
+
+  getDatabaseUser(): string {
+    return this.configService.get<string>('DATABASE_USER');
+  }
+
+  getDatabasePassword(): string {
+    return this.configService.get<string>('DATABASE_PASSWORD');
+  }
+
+  getDatabaseName(): string {
+    return this.configService.get<string>('DATABASE_NAME');
+  }
+
+  getDatabaseSchema(): string {
+    return this.configService.get<string>('DATABASE_SCHEMA');
+  }
+
+  getDatabaseSync(): boolean {
+    return this.configService.get<boolean>('DATABASE_SYNCHRONIZE');
+  }
+}
