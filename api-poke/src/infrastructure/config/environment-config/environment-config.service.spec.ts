@@ -1,53 +1,18 @@
-import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { DatabaseConfig } from '../../../domain/config/database.interface';
-import { JWTConfig } from '../../../domain/config/jwt.interface';
+import { Test, TestingModule } from '@nestjs/testing';
+import { EnvironmentConfigService } from './environment-config.service';
 
-@Injectable()
-export class EnvironmentConfigService implements DatabaseConfig, JWTConfig {
-  constructor(private configService: ConfigService) {}
-  
-  getJwtSecret(): string {
-    return this.configService.get<string>('JWT_SECRET');
-  }
+describe('EnvironmentConfigService', () => {
+  let service: EnvironmentConfigService;
 
-  getJwtExpirationTime(): string {
-    return this.configService.get<string>('JWT_EXPIRATION_TIME');
-  }
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [EnvironmentConfigService],
+    }).compile();
 
-  getJwtRefreshSecret(): string {
-    return this.configService.get<string>('JWT_REFRESH_TOKEN_SECRET');
-  }
+    service = module.get<EnvironmentConfigService>(EnvironmentConfigService);
+  });
 
-  getJwtRefreshExpirationTime(): string {
-    return this.configService.get<string>('JWT_REFRESH_TOKEN_EXPIRATION_TIME');
-  }
-
-  getDatabaseHost(): string {
-    return this.configService.get<string>('DATABASE_HOST');
-  }
-
-  getDatabasePort(): number {
-    return this.configService.get<number>('DATABASE_PORT');
-  }
-
-  getDatabaseUser(): string {
-    return this.configService.get<string>('DATABASE_USER');
-  }
-
-  getDatabasePassword(): string {
-    return this.configService.get<string>('DATABASE_PASSWORD');
-  }
-
-  getDatabaseName(): string {
-    return this.configService.get<string>('DATABASE_NAME');
-  }
-
-  getDatabaseSchema(): string {
-    return this.configService.get<string>('DATABASE_SCHEMA');
-  }
-
-  getDatabaseSync(): boolean {
-    return this.configService.get<boolean>('DATABASE_SYNCHRONIZE');
-  }
-}
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
