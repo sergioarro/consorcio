@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Inject, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, Post, Put, Query } from '@nestjs/common';
 import { ApiExtraModels, ApiResponse, ApiTags, ApiOperation } from '@nestjs/swagger';
 import { UseCaseProxy } from '../../usecases-proxy/usecases-proxy';
 import { UsecasesProxyModule } from '../../usecases-proxy/usecases-proxy.module';
@@ -7,8 +7,8 @@ import { PokemonPresenter } from './pokemon.presenter';
 import { ApiResponseType } from '../../common/swagger/response.decorator';
 import { PokemonDto } from './pokemon.dto';
 
-@Controller('todo')
-@ApiTags('todo')
+@Controller('pokemon')
+@ApiTags('pokemon')
 @ApiResponse({ status: 500, description: 'Internal error' })
 @ApiExtraModels(PokemonPresenter)
 export class PokemonController {
@@ -17,10 +17,10 @@ export class PokemonController {
     private readonly getPokemonUsecaseProxy: UseCaseProxy<GetPokemonUseCases>,
   ) {}
 
-  @Get('pokemon')
+  @Get(':name')
   @ApiResponseType(PokemonPresenter, false)
   @ApiOperation({ description: 'getPokemon' })
-  async getPokemon(@Query('name', ParseIntPipe) name: string) {
+  async getPokemon(@Query('name') name: string) {
     const pokemon = await this.getPokemonUsecaseProxy.getInstance().execute(name);
     return new PokemonPresenter(pokemon);
   }

@@ -1,6 +1,7 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class addUser1648623447697 implements MigrationInterface {
+export class addPokemons20220609 implements MigrationInterface {
+    name = 'addPokemons20220609'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TABLE "public"."pokemon" ("id" SERIAL NOT NULL, "name" character varying(100) NOT NULL, "clase" character varying(200), "power" character varying(200), UNIQUE ("name"), PRIMARY KEY ("id"))`);

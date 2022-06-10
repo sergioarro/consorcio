@@ -30,9 +30,9 @@ export class UsecasesProxyModule {
         {
           inject: [DatabasePokemonRepository],
           provide: UsecasesProxyModule.GET_POKEMON_USECASES_PROXY,
-          //useFactory: (pokemonRepository: DatabasePokemonRepository) => new UseCaseProxy(new GetPokemonUseCases(pokemonRepository)),
-          useFactory: (logger: LoggerService, pokemonRepository: DatabasePokemonRepository) =>
-            new UseCaseProxy(new GetPokemonUseCases(logger, pokemonRepository)),
+          useFactory: (pokemonRepository: DatabasePokemonRepository) => new UseCaseProxy(new GetPokemonUseCases(pokemonRepository)),
+          //useFactory: (logger: LoggerService, pokemonRepository: DatabasePokemonRepository) =>
+            //new UseCaseProxy(new GetPokemonUseCases(logger, pokemonRepository)),
         },
       ],
       exports: [
