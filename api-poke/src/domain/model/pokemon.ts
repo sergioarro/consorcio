@@ -1,7 +1,6 @@
-export class Pokemon {
+export class PokemonM {
     id: number;
     name: string;
     clase: string;
-    poder: string;
-    nivel: number;
+    power: string;
   }
