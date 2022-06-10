@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { PokemonM } from '../../domain/model/pokemon';
-import { PokemonRepository } from '../../domain/repositories/userRepository.interface';
+import { PokemonRepository } from '../../domain/repositories/pokemonRepository.interface';
 import { Pokemon } from '../entities/pokemon.entity';
 
 @Injectable()
