@@ -19,11 +19,17 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "typeorm:win": "NODE_ENV=local ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config src/infrastructure/config/typeorm/typeorm.config.ts",
-    "typeorm:generate:win": "npm run typeorm:win migration:generate -- -n",
-    "typeorm:create:win": "npm run typeorm:win migration:create -n addPokemons",
-    "typeorm:run:win": "npm run typeorm:win migration:run",
-    "typeorm:revert:win": "npm run typeorm:win migration:revert"
+    "typeorm": "NODE_ENV=local ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js -d src/infrastructure/config/typeorm/typeorm.config.ts",
+    "typeorm:generate": "npm run typeorm -- migration:generate -n",
+    "typeorm:create": "typeorm-ts-node-commonjs migration:create",
+    "typeorm:run": "npm run typeorm migration:run",
+    "typeorm:revert": "npm run typeorm migration:revert",
+    "typeorm:show": "npm run typeorm migration:show",
+    "seed:config": "NODE_ENV=local ts-node ./node_modules/typeorm-seeding/dist/cli.js config -n src/infrastructure/config/typeorm/typeorm.config.ts",
+    "seed:run": "NODE_ENV=local ts-node ./node_modules/typeorm-seeding/dist/cli.js seed -n src/infrastructure/config/typeorm/typeorm.config.ts",
+    "docker:postgres": "docker run --name pokedex-db -e POSTGRES_PASSWORD=consorcio -e POSTGRES_USER=postgres -e POSTGRES_DB=pokedex -p 5432:5432 -d postgres",
+    "docker:stop": "docker stop pokedex-db && docker rm pokedex-db",
+    "docker:reset": "npm run docker:stop && docker:postgres"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
@@ -39,7 +45,8 @@
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
     "swagger-ui-express": "^4.4.0",
-    "typeorm": "^0.3.6"
+    "typeorm": "^0.3.6",
+    "typeorm-seeding": "^1.6.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",

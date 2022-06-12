@@ -17,7 +17,7 @@ export const getTypeOrmModuleOptions = (config: EnvironmentConfigService): TypeO
     migrationsRun: true,
     migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
     cli: {
-      migrationsDir: 'src/migrations',
+      migrationsDir: 'database/migrations',
     },
     // ssl: {
     //   rejectUnauthorized: false,

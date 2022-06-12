@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AllExceptionFilter } from './infrastructure/common/filter/exception.filter';
 import { LoggingInterceptor } from './infrastructure/common/interceptors/logger.interceptor';
 import { ResponseFormat, ResponseInterceptor } from './infrastructure/common/interceptors/response.interceptor';
@@ -23,6 +24,20 @@ async function bootstrap() {
 
   // base routing
   app.setGlobalPrefix('api_v1');
+
+  // swagger config
+  if (env !== 'production') {
+    const config = new DocumentBuilder()
+      .setTitle('Clean Architecture Nestjs')
+      .setDescription('Test Consorcio Pokemon')
+      .setVersion('1.0')
+      .build();
+    const document = SwaggerModule.createDocument(app, config, {
+      extraModels: [ResponseFormat],
+      deepScanRoutes: true,
+    });
+    SwaggerModule.setup('api', app, document);
+  }
 
   await app.listen(3000);
 }
