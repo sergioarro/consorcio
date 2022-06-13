@@ -53,7 +53,10 @@ Example
 http://localhost:3000/api_v1/pokemon/Mew
 
 # Healthchecks (Terminus)
-http://localhost:3000/api_v1/health
+Api
+http://localhost:3000/api_v1/health/api
+DataBase
+http://localhost:3000/api_v1/health/db
 
 ## Support
 
