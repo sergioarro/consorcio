@@ -11,7 +11,7 @@ import { EnvironmentConfigModule } from './infrastructure/config/environment-con
     ExceptionsModule,
     UsecasesProxyModule.register(),
     ControllersModule,
-    EnvironmentConfigModule,
+    EnvironmentConfigModule
   ]
 })
 export class AppModule {}

@@ -33,7 +33,7 @@ export class UsecasesProxyModule {
           useFactory: (pokemonRepository: DatabasePokemonRepository) => new UseCaseProxy(new GetPokemonUseCases(pokemonRepository)),
           //useFactory: (logger: LoggerService, pokemonRepository: DatabasePokemonRepository) =>
             //new UseCaseProxy(new GetPokemonUseCases(logger, pokemonRepository)),
-        },
+        }
       ],
       exports: [
         UsecasesProxyModule.GET_POKEMON_USECASES_PROXY,
