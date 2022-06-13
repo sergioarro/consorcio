@@ -28,11 +28,9 @@
     "seed:config": "NODE_ENV=local ts-node ./node_modules/typeorm-seeding/dist/cli.js config -n src/infrastructure/config/typeorm/typeorm.config.ts",
     "seed:run": "NODE_ENV=local ts-node ./node_modules/typeorm-seeding/dist/cli.js seed -n src/infrastructure/config/typeorm/typeorm.config.ts",
     "docker:postgres": "docker run --name pokedex-db -e POSTGRES_PASSWORD=consorcio -e POSTGRES_USER=postgres -e POSTGRES_DB=pokedex -p 5432:5432 -d postgres",
-    "docker:stop": "docker stop pokedex-db && docker rm pokedex-db",
-    "docker:reset": "npm run docker:stop && docker:postgres"
+    "docker:stop": "docker stop pokedex-db && docker rm pokedex-db"
   },
   "dependencies": {
-    "@nestjs/axios": "0.0.8",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^2.1.0",
     "@nestjs/core": "^8.0.0",
