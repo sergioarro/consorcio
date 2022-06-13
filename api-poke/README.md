@@ -33,28 +33,24 @@ $ npm install
 ```
 
 ## Docker Postgres
-docker run --name pokedex-db -e POSTGRES_PASSWORD=consorcio -e POSTGRES_USER=postgres -e POSTGRES_DB=pokedex -p 5432:5432 -d postgres
+$ npm run docker:postgres
+$ npm run docker:stop
+
+## TypeOrm Creación de base de datos , tablas , indices.
+$ npm run typeorm:run
+
+## Seeds Carga inicial de datos (Pokemones) 
+Se cargan 2 Pokemones de ejemplo Pikachu y Mew
+$ npm run seed:run
 
 ## Running the app
-# watch mode
+# watch mode para correr en local Api
 $ npm run start:dev
 
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
+## Endpoint
+http://localhost:3000/api_v1/pokemon/:name
+Example 
+http://localhost:3000/api_v1/pokemon/Mew
 
 ## Support
 
