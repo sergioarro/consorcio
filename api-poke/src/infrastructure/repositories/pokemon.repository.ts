@@ -13,6 +13,7 @@ export class DatabasePokemonRepository implements PokemonRepository {
   ) {}
 
   async getPokemonByName(name: string): Promise<PokemonM> {
+    console.log("getPokemonByName : name 1 ", name);
     const pokemonEntity = await this.pokemonEntityRepository.findOneOrFail({ 
         where: {
         name: name,

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Inject, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, Post, Put, Query, Param } from '@nestjs/common';
 import { ApiExtraModels, ApiResponse, ApiTags, ApiOperation } from '@nestjs/swagger';
 import { UseCaseProxy } from '../../usecases-proxy/usecases-proxy';
 import { UsecasesProxyModule } from '../../usecases-proxy/usecases-proxy.module';
@@ -20,7 +20,7 @@ export class PokemonController {
   @Get(':name')
   @ApiResponseType(PokemonPresenter, false)
   @ApiOperation({ description: 'getPokemon' })
-  async getPokemon(@Query('name') name: string) {
+  async getPokemon(@Param('name') name : string) {
     const pokemon = await this.getPokemonUsecaseProxy.getInstance().execute(name);
     return new PokemonPresenter(pokemon);
   }
